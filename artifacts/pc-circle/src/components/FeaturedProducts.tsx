@@ -18,19 +18,15 @@ const getCategoryIcon = (category: string) => {
 
 export default function FeaturedProducts() {
   return (
-    <section className="py-24 bg-muted/30">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+        <div className="flex items-end justify-between mb-10">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight mb-2">Featured Products</h2>
-            <p className="text-muted-foreground">Handpicked gear for uncompromising performance.</p>
+            <h2 className="text-3xl font-extrabold tracking-tight uppercase border-l-4 border-primary pl-4 text-white">Featured Hardware</h2>
           </div>
-          <button className="text-sm font-semibold text-primary hover:underline" data-testid="button-view-all">
-            View All Products &rarr;
-          </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {STORE_DATA.products.map((product, index) => {
             const Icon = getCategoryIcon(product.category);
             
@@ -41,50 +37,48 @@ export default function FeaturedProducts() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="group flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
+                className="group flex flex-col bg-[#0d0d0d] border border-border overflow-hidden hover:border-primary transition-all duration-300 relative"
                 data-testid={`product-card-${product.id}`}
               >
-                {/* Image Placeholder */}
-                <div 
-                  className="relative aspect-square w-full overflow-hidden flex items-center justify-center"
-                  style={{ backgroundColor: product.color }}
-                >
+                {/* Image Area */}
+                <div className="relative aspect-[4/3] w-full overflow-hidden flex items-center justify-center bg-[#111] border-b border-border p-6">
                   {product.badge && (
-                    <span className="absolute top-4 left-4 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground z-10 shadow-lg">
+                    <span className="absolute top-3 left-3 bg-primary px-2.5 py-1 text-[10px] font-bold text-white uppercase tracking-wider z-10 shadow-sm">
                       {product.badge}
                     </span>
                   )}
-                  <Icon className="w-24 h-24 text-white/20 group-hover:scale-110 transition-transform duration-500" />
+                  <Icon className="w-20 h-20 text-white/10 group-hover:scale-110 group-hover:text-white/20 transition-all duration-500" strokeWidth={1} />
                 </div>
 
                 {/* Content */}
-                <div className="flex flex-col flex-grow p-6">
-                  <div className="text-xs font-medium text-primary mb-2 uppercase tracking-wider">{product.category}</div>
-                  <h3 className="font-bold text-lg mb-1 line-clamp-1">{product.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-1">{product.specs}</p>
+                <div className="flex flex-col flex-grow p-5">
+                  <div className="text-[10px] font-bold text-muted-foreground mb-2 uppercase tracking-wider">{product.category}</div>
+                  <h3 className="font-bold text-base text-white mb-2 line-clamp-2 leading-snug group-hover:text-primary transition-colors">{product.name}</h3>
+                  <p className="text-xs text-[#aaaaaa] mb-4 line-clamp-2 leading-relaxed">{product.specs}</p>
                   
                   {/* Rating */}
-                  <div className="flex items-center gap-1 mb-4 mt-auto">
+                  <div className="flex items-center gap-0.5 mb-4 mt-auto">
                     {[...Array(5)].map((_, i) => (
                       <Star 
                         key={i} 
-                        className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-amber-400 text-amber-400" : "fill-muted text-muted"}`} 
+                        className={`w-3.5 h-3.5 ${i < Math.floor(product.rating) ? "fill-secondary text-secondary" : "fill-border text-border"}`} 
                       />
                     ))}
-                    <span className="text-xs text-muted-foreground ml-1">({product.reviewCount})</span>
+                    <span className="text-[10px] text-muted-foreground ml-1 font-bold">({product.reviewCount})</span>
                   </div>
 
                   {/* Price & Action */}
-                  <div className="flex items-center justify-between mt-auto">
-                    <div>
-                      <span className="text-lg font-bold">{product.price} {STORE_DATA.currency}</span>
+                  <div className="flex items-end justify-between mt-auto">
+                    <div className="flex flex-col">
                       {product.originalPrice && (
-                        <span className="text-sm text-muted-foreground line-through ml-2">{product.originalPrice} {STORE_DATA.currency}</span>
+                        <span className="text-xs text-muted-foreground line-through font-medium mb-0.5">{product.originalPrice} {STORE_DATA.currency}</span>
                       )}
+                      <span className="text-xl font-extrabold text-secondary">{product.price} {STORE_DATA.currency}</span>
                     </div>
                     <button 
-                      className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+                      className="flex h-10 w-10 items-center justify-center bg-primary text-white hover:bg-[#8f1212] transition-colors active:scale-95"
                       data-testid={`button-add-cart-${product.id}`}
+                      aria-label="Add to cart"
                     >
                       <ShoppingCart className="w-5 h-5" />
                     </button>

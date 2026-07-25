@@ -1,5 +1,5 @@
 import { STORE_DATA } from "@/data/storeData";
-import { Laptop, Monitor, Cpu, Mouse, Smartphone, HardDrive, Printer, Wifi, Zap, Droplets, Plug, Headphones } from "lucide-react";
+import { Laptop, Monitor, Cpu, Mouse, Smartphone, HardDrive, Printer, Wifi, Zap, Droplets, Plug, Headphones, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const iconMap: Record<string, any> = {
@@ -20,14 +20,17 @@ const iconMap: Record<string, any> = {
 
 export default function CategoryGrid() {
   return (
-    <section className="py-20 bg-background" id="categories">
+    <section className="py-16 bg-[#0a0a0a] border-y border-border relative overflow-hidden" id="categories">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col gap-2 mb-10 text-center md:text-left">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Shop by Category</h2>
-          <p className="text-muted-foreground">Find exactly what you need.</p>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-extrabold tracking-tight uppercase border-l-4 border-primary pl-4 text-white">Categories</h2>
+          <button className="text-sm font-bold text-secondary hover:text-primary transition-colors flex items-center gap-1 uppercase">
+            View All <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* Horizontal scroll container for categories */}
+        <div className="flex overflow-x-auto pb-6 -mx-4 px-4 gap-4 snap-x hide-scrollbar">
           {STORE_DATA.categories.map((category, index) => {
             const Icon = iconMap[category.name] || Mouse;
             
@@ -35,27 +38,36 @@ export default function CategoryGrid() {
               <motion.a
                 href={`#${category.name.toLowerCase()}`}
                 key={category.name}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="group relative flex flex-col items-center sm:items-start p-5 rounded-xl border border-border bg-card overflow-hidden hover:-translate-y-1 transition-all duration-300 hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] hover:border-primary/50"
+                className="group flex-shrink-0 w-36 sm:w-44 flex flex-col items-center justify-center p-6 rounded-md bg-card border border-border snap-start hover:border-primary transition-all duration-300 relative overflow-hidden"
                 data-testid={`category-card-${category.name}`}
               >
-                <div className="mb-4 p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                  <Icon className="w-6 h-6" />
+                {/* Hover Glow */}
+                <div className="absolute inset-0 bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                <div className="relative mb-4 text-muted-foreground group-hover:text-secondary group-hover:scale-110 transition-all duration-300">
+                  <Icon className="w-10 h-10" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-base font-bold mb-1 line-clamp-1">{category.name}</h3>
-                <p className="text-xs text-muted-foreground font-medium">{category.count} products</p>
-                
-                <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-5 translate-x-4 group-hover:translate-x-0 transition-all duration-300 pointer-events-none">
-                  <Icon className="w-24 h-24 text-primary" />
-                </div>
+                <h3 className="text-xs sm:text-sm font-bold text-center line-clamp-2 uppercase text-white group-hover:text-white transition-colors">{category.name}</h3>
               </motion.a>
             );
           })}
         </div>
       </div>
+      
+      {/* CSS to hide scrollbar for the container */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}} />
     </section>
   );
 }

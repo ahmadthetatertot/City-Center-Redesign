@@ -11,16 +11,13 @@ const iconMap: Record<string, any> = {
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-20 bg-background border-b border-border">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight mb-4">The PC Circle Advantage</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            We don't just sell hardware; we stand behind it. Experience premium service tailored for tech enthusiasts.
-          </p>
+        <div className="text-center mb-12">
+          <h2 className="text-2xl font-extrabold tracking-tight uppercase text-white"><span className="text-primary">//</span> Why PC Circle</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {STORE_DATA.trustBadges.map((badge, index) => {
             const Icon = iconMap[badge.title] || ShieldCheck;
             return (
@@ -30,13 +27,13 @@ export default function WhyChooseUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center p-6 rounded-2xl bg-muted/30 border border-transparent hover:border-border hover:bg-card transition-all duration-300"
+                className="flex flex-col items-center text-center p-8 bg-[#0d0d0d] border border-border hover:border-primary transition-colors"
               >
-                <div className="mb-4 text-primary">
-                  <Icon className="w-10 h-10" />
+                <div className="mb-4 text-primary bg-primary/10 p-4 rounded-full">
+                  <Icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-lg font-bold mb-2">{badge.title}</h3>
-                <p className="text-sm text-muted-foreground">{badge.description}</p>
+                <h3 className="text-sm font-bold mb-2 uppercase text-white tracking-wider">{badge.title}</h3>
+                <p className="text-xs text-[#aaaaaa] leading-relaxed">{badge.description}</p>
               </motion.div>
             );
           })}

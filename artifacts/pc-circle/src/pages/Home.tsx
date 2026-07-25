@@ -10,14 +10,14 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-primary/20 selection:text-primary">
+    <div className="flex flex-col w-full">
       <Header />
       <main className="flex-grow">
         <Hero />
         <CategoryGrid />
-        <Brands />
-        <FeaturedProducts />
         <DealsBanner />
+        <FeaturedProducts />
+        <Brands />
         <WhyChooseUs />
         <Newsletter />
       </main>

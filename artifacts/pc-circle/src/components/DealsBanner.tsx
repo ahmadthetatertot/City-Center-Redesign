@@ -37,47 +37,44 @@ export default function DealsBanner() {
   const pad = (num: number) => num.toString().padStart(2, '0');
 
   return (
-    <section className="relative overflow-hidden bg-primary py-16 text-primary-foreground">
-      {/* Background patterns */}
-      <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.1)_50%,transparent_75%)] bg-[length:20px_20px] opacity-20"></div>
-      
-      <div className="container relative z-10 mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 bg-black/10 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+    <section className="bg-gradient-to-r from-[#7a0f0f] via-primary to-[#8f1212] text-white py-12 border-y-[4px] border-[#0a0a0a]">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           
           <div className="flex items-center gap-6">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-primary shadow-lg">
+            <div className="flex h-16 w-16 items-center justify-center bg-[#0a0a0a] text-secondary rounded-sm shadow-xl shrink-0">
               <Zap className="h-8 w-8 animate-pulse" />
             </div>
             <div>
-              <h2 className="text-3xl font-bold tracking-tight mb-1">Flash Sale: Up to 40% Off</h2>
-              <p className="text-primary-foreground/80 font-medium">Top-tier graphics cards and gaming laptops.</p>
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-1 uppercase text-secondary drop-shadow-md">Hot Deals</h2>
+              <p className="text-white/90 font-bold uppercase tracking-wider text-sm">Top-tier graphics cards and gaming laptops.</p>
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-8 bg-[#0a0a0a]/20 p-4 sm:p-2 sm:pr-4 rounded-sm border border-white/10 w-full sm:w-auto">
             {/* Countdown */}
-            <div className="flex items-center gap-3 font-mono text-3xl font-bold bg-black/20 px-6 py-3 rounded-xl border border-white/10">
+            <div className="flex items-center gap-3 font-mono text-3xl font-bold px-4">
               <div className="flex flex-col items-center">
-                <span>{pad(timeLeft.hours)}</span>
-                <span className="text-[10px] uppercase font-sans font-semibold text-primary-foreground/70">Hours</span>
+                <span className="text-white drop-shadow-md">{pad(timeLeft.hours)}</span>
+                <span className="text-[10px] uppercase font-sans font-extrabold text-secondary mt-1">Hours</span>
               </div>
-              <span className="mb-4">:</span>
+              <span className="mb-4 text-white/50">:</span>
               <div className="flex flex-col items-center">
-                <span>{pad(timeLeft.minutes)}</span>
-                <span className="text-[10px] uppercase font-sans font-semibold text-primary-foreground/70">Mins</span>
+                <span className="text-white drop-shadow-md">{pad(timeLeft.minutes)}</span>
+                <span className="text-[10px] uppercase font-sans font-extrabold text-secondary mt-1">Mins</span>
               </div>
-              <span className="mb-4">:</span>
+              <span className="mb-4 text-white/50">:</span>
               <div className="flex flex-col items-center">
-                <span>{pad(timeLeft.seconds)}</span>
-                <span className="text-[10px] uppercase font-sans font-semibold text-primary-foreground/70">Secs</span>
+                <span className="text-white drop-shadow-md">{pad(timeLeft.seconds)}</span>
+                <span className="text-[10px] uppercase font-sans font-extrabold text-secondary mt-1">Secs</span>
               </div>
             </div>
 
             <button 
-              className="px-8 py-4 bg-white text-primary rounded-xl font-bold text-lg hover:bg-slate-100 transition-colors shadow-lg shadow-black/10 active:scale-95"
+              className="w-full sm:w-auto px-8 py-3.5 bg-black text-white hover:text-secondary border border-border hover:border-secondary font-bold text-sm uppercase tracking-wider transition-colors active:scale-95"
               data-testid="button-claim-deal"
             >
-              Claim Deal
+              Shop Deals
             </button>
           </div>
           

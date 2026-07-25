@@ -1,109 +1,104 @@
 import { useState } from "react";
 import { STORE_DATA } from "@/data/storeData";
 import { Link } from "wouter";
-import { ShoppingCart, Search, Menu, X, Moon, Sun, CircleDashed, Phone, Heart, User } from "lucide-react";
-import { useTheme } from "next-themes";
+import { ShoppingCart, Search, Menu, X, CircleDashed, Phone, Heart, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   return (
     <>
-      {/* Top Utility Bar */}
-      <div className="bg-slate-950 text-slate-300 text-xs py-2 hidden md:block">
-        <div className="container mx-auto px-4 flex items-center justify-between h-8">
-          <div className="flex items-center gap-4">
-            <a href={`tel:${STORE_DATA.phone.replace(/\s+/g, '')}`} className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone className="w-3.5 h-3.5" />
-              <span>{STORE_DATA.phone}</span>
-            </a>
-            <span className="w-px h-3 bg-slate-700"></span>
-            <Link href="#brands" className="hover:text-white transition-colors">Brands</Link>
-          </div>
-          <div className="flex-1 text-center font-medium text-slate-200">
-            {STORE_DATA.announcementBar}
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Heart className="w-3.5 h-3.5" />
-              <span>Wishlist</span>
-            </button>
-            <span className="w-px h-3 bg-slate-700"></span>
-            <button className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <User className="w-3.5 h-3.5" />
-              <span>Login / Register</span>
-            </button>
-          </div>
+      {/* Top Utility Bar - Announcement */}
+      <div className="bg-black text-center py-2 border-b border-border">
+        <div className="container mx-auto px-4 text-xs font-bold tracking-wider">
+          <span className="text-secondary">{STORE_DATA.announcementBar.split('—')[0]}</span>
+          <span className="text-primary ml-2 hidden sm:inline">— {STORE_DATA.announcementBar.split('—')[1]}</span>
         </div>
       </div>
 
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md transition-colors duration-300">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <header className="sticky top-0 z-50 w-full border-b-[3px] border-primary bg-[#0a0a0a]">
+        {/* Main Header Row */}
+        <div className="container mx-auto px-4 h-20 flex items-center justify-between gap-6">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group" data-testid="link-home">
+          <Link href="/" className="flex items-center gap-2 group flex-shrink-0" data-testid="link-home">
             <CircleDashed className="w-8 h-8 text-primary group-hover:rotate-90 transition-transform duration-500" />
-            <span className="font-bold text-xl tracking-tight hidden sm:block">{STORE_DATA.storeName}</span>
+            <span className="font-extrabold text-2xl tracking-tight text-white hidden sm:block uppercase">PC CIRCLE</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
-            {STORE_DATA.navLinks.map((link) => (
-              <Link
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                data-testid={`nav-link-${link}`}
-              >
-                {link}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop Search Bar */}
-          <div className="hidden lg:flex relative items-center max-w-sm w-full mx-4">
-            <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          {/* Centered Search Bar */}
+          <div className="hidden lg:flex relative flex-1 max-w-2xl mx-auto">
+            <div className="relative w-full flex">
               <input 
                 type="text" 
-                placeholder="Search products..." 
-                className="w-full h-9 pl-9 pr-4 rounded-full border border-border bg-muted/50 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                placeholder="Search for components, laptops, peripherals..." 
+                className="w-full h-11 pl-5 pr-4 rounded-l-md border border-border bg-card text-sm text-foreground focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground"
               />
+              <button className="h-11 px-6 bg-primary text-primary-foreground font-bold rounded-r-md hover:bg-primary/90 transition-colors flex items-center gap-2">
+                <Search className="w-4 h-4" />
+                <span className="hidden xl:block">Search</span>
+              </button>
             </div>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
-            {/* Mobile Search Icon */}
-            <button className="lg:hidden text-muted-foreground hover:text-foreground transition-colors" data-testid="button-search">
-              <Search className="w-5 h-5" />
-            </button>
-            
-            <button 
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              data-testid="button-theme-toggle"
-            >
-              <Sun className="w-5 h-5 hidden dark:block" />
-              <Moon className="w-5 h-5 block dark:hidden" />
+          <div className="flex items-center gap-6 flex-shrink-0">
+            <button className="lg:hidden text-white hover:text-primary transition-colors" data-testid="button-search">
+              <Search className="w-6 h-6" />
             </button>
 
-            <Link href="/cart" className="relative text-muted-foreground hover:text-foreground transition-colors" data-testid="link-cart">
-              <ShoppingCart className="w-5 h-5" />
-              <span className="absolute -top-1.5 -right-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                3
-              </span>
+            <button className="hidden md:flex flex-col items-end text-white hover:text-primary transition-colors group">
+              <span className="text-[10px] text-muted-foreground font-bold uppercase group-hover:text-primary transition-colors">Call Us</span>
+              <span className="text-sm font-bold flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" /> {STORE_DATA.phone}</span>
+            </button>
+
+            <button className="hidden sm:flex text-white hover:text-primary transition-colors relative">
+              <Heart className="w-6 h-6" />
+            </button>
+
+            <button className="hidden sm:flex text-white hover:text-primary transition-colors">
+              <User className="w-6 h-6" />
+            </button>
+
+            <Link href="/cart" className="relative text-white hover:text-secondary transition-colors flex items-center gap-2" data-testid="link-cart">
+              <div className="relative">
+                <ShoppingCart className="w-7 h-7" />
+                <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-[11px] font-extrabold text-black">
+                  3
+                </span>
+              </div>
+              <div className="hidden md:flex flex-col items-start ml-1">
+                <span className="text-[10px] text-muted-foreground font-bold uppercase">My Cart</span>
+                <span className="text-sm font-bold text-secondary">0.00 {STORE_DATA.currency}</span>
+              </div>
             </Link>
 
             {/* Mobile Menu Toggle */}
             <button 
-              className="md:hidden text-muted-foreground hover:text-foreground transition-colors"
+              className="lg:hidden text-white hover:text-primary transition-colors ml-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               data-testid="button-mobile-menu"
             >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
             </button>
+          </div>
+        </div>
+
+        {/* Desktop Nav Row */}
+        <div className="hidden lg:block bg-black border-t border-border">
+          <div className="container mx-auto px-4">
+            <nav className="flex items-center gap-8 h-12">
+              {STORE_DATA.navLinks.map((link) => (
+                <Link
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  className="text-sm font-bold text-white hover:text-primary transition-colors uppercase tracking-wide"
+                  data-testid={`nav-link-${link}`}
+                >
+                  {link}
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
 
@@ -114,14 +109,14 @@ export default function Header() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="md:hidden border-b border-border bg-background overflow-hidden"
+              className="lg:hidden bg-[#0d0d0d] overflow-hidden border-t border-border absolute w-full"
             >
-              <nav className="flex flex-col p-4 gap-4">
+              <nav className="flex flex-col p-4">
                 {STORE_DATA.navLinks.map((link) => (
                   <Link
                     key={link}
                     href={`#${link.toLowerCase()}`}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                    className="text-sm font-bold text-white hover:text-primary transition-colors py-3 border-b border-border uppercase tracking-wider"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link}

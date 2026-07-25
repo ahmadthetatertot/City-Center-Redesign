@@ -20,12 +20,13 @@ const brandIconMap: Record<string, any> = {
 
 export default function Brands() {
   return (
-    <section className="py-16 bg-background border-t border-border/40" id="brands">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Top Brands We Carry</h2>
-        <p className="text-muted-foreground mb-10">Authorized reseller for leading global manufacturers</p>
+    <section className="py-16 bg-[#080808] border-y border-border" id="brands">
+      <div className="container mx-auto px-4">
+        <h2 className="text-2xl font-extrabold tracking-tight mb-8 uppercase text-center text-white">
+          <span className="text-primary">//</span> Shop By Brand
+        </h2>
         
-        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+        <div className="flex flex-wrap justify-center gap-4">
           {STORE_DATA.brands.map((brand, index) => {
             const Icon = brandIconMap[brand];
             return (
@@ -34,11 +35,11 @@ export default function Brands() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-card hover:border-primary hover:text-primary transition-colors duration-300 shadow-sm cursor-pointer"
+                transition={{ duration: 0.3, delay: index * 0.03 }}
+                className="flex items-center gap-2 px-6 py-4 bg-[#111] border border-border hover:border-secondary hover:bg-[#1a1a1a] text-muted-foreground hover:text-secondary transition-all duration-300 cursor-pointer min-w-[140px] justify-center"
               >
-                {Icon && <Icon className="w-5 h-5" />}
-                <span className="font-semibold text-sm">{brand}</span>
+                {Icon && <Icon className="w-6 h-6" />}
+                <span className="font-bold text-sm uppercase tracking-wider">{brand}</span>
               </motion.div>
             );
           })}
