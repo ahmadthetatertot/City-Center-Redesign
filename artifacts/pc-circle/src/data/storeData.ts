@@ -1,0 +1,37 @@
+export const STORE_DATA = {
+  storeName: "PC Circle",
+  tagline: "Power Your World",
+  phone: "+1 (800) 724-2675",
+  email: "hello@pccircle.com",
+  address: "123 Tech Avenue, San Francisco, CA 94105",
+  socialLinks: { twitter: "#", youtube: "#", instagram: "#", facebook: "#" },
+  navLinks: ["Home", "Laptops", "Desktops", "Components", "Deals", "Contact"],
+  categories: [
+    { name: "Laptops", count: 142 },
+    { name: "Desktops", count: 87 },
+    { name: "Graphics Cards", count: 63 },
+    { name: "Monitors", count: 51 },
+    { name: "Accessories", count: 209 },
+  ],
+  products: [
+    { id: 1, name: "ProBook Ultra 15", specs: "Intel i9 · 32GB RAM · 2TB SSD", price: 1899, originalPrice: 2299, rating: 4.8, reviewCount: 312, category: "Laptops", badge: "Best Seller", color: "#1e3a5f" },
+    { id: 2, name: "RTX Gaming Tower", specs: "RTX 4080 · Ryzen 9 · 64GB RAM", price: 2499, originalPrice: 2999, rating: 4.9, reviewCount: 187, category: "Desktops", badge: "Top Rated", color: "#1a1a2e" },
+    { id: 3, name: 'Creator Display 27"', specs: "4K OLED · 144Hz · HDR1000", price: 899, originalPrice: 1099, rating: 4.7, reviewCount: 94, category: "Monitors", badge: "New", color: "#0d2137" },
+    { id: 4, name: "PowerEdge GPU 4070", specs: "12GB VRAM · Ray Tracing · DLSS 3", price: 649, originalPrice: 799, rating: 4.6, reviewCount: 231, category: "Graphics Cards", badge: "Hot Deal", color: "#1b2838" },
+    { id: 5, name: "StealthBook Air", specs: "M3 Pro · 18GB · 512GB · 15hr battery", price: 1299, originalPrice: 1499, rating: 4.8, reviewCount: 445, category: "Laptops", badge: "Editor's Pick", color: "#2c3e50" },
+    { id: 6, name: "MiniPower Desktop", specs: "Intel i7 · 16GB RAM · 1TB NVMe", price: 799, originalPrice: 999, rating: 4.5, reviewCount: 128, category: "Desktops", badge: "Value Pick", color: "#162032" },
+  ],
+  dealCountdownHours: 24,
+  trustBadges: [
+    { title: "2-Year Warranty", description: "Full coverage on all hardware" },
+    { title: "Free Next-Day Delivery", description: "On orders over $99" },
+    { title: "24/7 Expert Support", description: "Real tech experts, always on" },
+    { title: "0% Financing", description: "Buy now, pay over 12 months" },
+  ],
+  footerLinks: {
+    Shop: ["Laptops", "Desktops", "Graphics Cards", "Monitors", "Accessories", "Deals"],
+    Support: ["Help Center", "Track Order", "Returns", "Warranty Claims", "Contact Us"],
+    Company: ["About Us", "Careers", "Press", "Partners", "Blog"],
+    Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Accessibility"],
+  },
+};
