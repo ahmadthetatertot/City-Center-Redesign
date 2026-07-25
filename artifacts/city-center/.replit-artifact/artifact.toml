@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/city-center/"
+title = "City Center Computers — Jordan"
+version = "1.0.0"
+id = "artifacts/city-center"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/city-center/" ]
+localPort = 21912
+
+[services.development]
+run = "pnpm --filter @workspace/city-center run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/city-center", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/city-center/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21912"
+BASE_PATH = "/city-center/"
