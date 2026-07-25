@@ -1,13 +1,17 @@
 import { STORE_DATA } from "@/data/storeData";
 import { motion } from "framer-motion";
-import { Star, ShoppingCart, Laptop, Monitor, Cpu, Gamepad2 } from "lucide-react";
+import { Star, ShoppingCart, Laptop, Monitor, Cpu, Smartphone, HardDrive, Printer, Wifi } from "lucide-react";
 
 const getCategoryIcon = (category: string) => {
   switch (category) {
-    case "Laptops": return Laptop;
-    case "Desktops": return Gamepad2;
-    case "Monitors": return Monitor;
-    case "Graphics Cards": return Cpu;
+    case "Laptops & Notebooks": return Laptop;
+    case "Desktop (PC)": return Monitor;
+    case "Components": return Cpu;
+    case "Monitor": return Monitor;
+    case "Tablets & Accessories": return Smartphone;
+    case "Storage": return HardDrive;
+    case "Printers & Scanners": return Printer;
+    case "Network Products": return Wifi;
     default: return Laptop;
   }
 };
@@ -73,9 +77,9 @@ export default function FeaturedProducts() {
                   {/* Price & Action */}
                   <div className="flex items-center justify-between mt-auto">
                     <div>
-                      <span className="text-lg font-bold">${product.price}</span>
+                      <span className="text-lg font-bold">{product.price} {STORE_DATA.currency}</span>
                       {product.originalPrice && (
-                        <span className="text-sm text-muted-foreground line-through ml-2">${product.originalPrice}</span>
+                        <span className="text-sm text-muted-foreground line-through ml-2">{product.originalPrice} {STORE_DATA.currency}</span>
                       )}
                     </div>
                     <button 

@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-slate-950 text-slate-400 pt-20 pb-10 border-t border-slate-900 dark">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-16">
           
           {/* Brand Column */}
           <div className="lg:col-span-2">
@@ -18,6 +18,13 @@ export default function Footer() {
             <p className="text-sm leading-relaxed mb-6 max-w-sm">
               {STORE_DATA.tagline}. Your premium destination for high-performance computing, expert advice, and unbeatable support.
             </p>
+            
+            <div className="flex flex-col gap-2 mb-8 text-sm">
+              <a href={`tel:${STORE_DATA.phone.replace(/\s+/g, '')}`} className="hover:text-primary transition-colors">{STORE_DATA.phone}</a>
+              <a href={`mailto:${STORE_DATA.email}`} className="hover:text-primary transition-colors">{STORE_DATA.email}</a>
+              <span className="text-slate-500">{STORE_DATA.address}</span>
+            </div>
+
             <div className="flex items-center gap-4">
               <a href={STORE_DATA.socialLinks.twitter} className="text-slate-500 hover:text-primary transition-colors">
                 <SiX className="w-5 h-5" />
@@ -41,7 +48,7 @@ export default function Footer() {
               <ul className="flex flex-col gap-3">
                 {links.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-sm hover:text-primary transition-colors">{link}</a>
+                    <a href={`#${link.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="text-sm hover:text-primary transition-colors">{link}</a>
                   </li>
                 ))}
               </ul>

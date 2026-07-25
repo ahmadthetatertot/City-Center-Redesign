@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import CategoryGrid from "@/components/CategoryGrid";
+import Brands from "@/components/Brands";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import DealsBanner from "@/components/DealsBanner";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -14,6 +15,7 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <CategoryGrid />
+        <Brands />
         <FeaturedProducts />
         <DealsBanner />
         <WhyChooseUs />
