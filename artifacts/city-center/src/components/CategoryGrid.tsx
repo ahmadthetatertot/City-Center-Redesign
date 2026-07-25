@@ -1,61 +1,53 @@
-import { Monitor, Laptop, Cpu, HardDrive, Network, Gamepad2, Printer, Headphones } from 'lucide-react';
+import { Laptop, Cpu, Monitor, Gamepad2, HardDrive, Database, Network, Headphones } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const CATEGORIES = [
-  { icon: Laptop, label: 'Gaming Laptops' },
-  { icon: Cpu, label: 'Gaming PC' },
-  { icon: Monitor, label: 'Monitors' },
-  { icon: Gamepad2, label: 'Gaming Gears' },
-  { icon: HardDrive, label: 'SSD Drives' },
-  { icon: HardDrive, label: 'External HDDs' },
-  { icon: Network, label: 'Networking' },
-  { icon: Headphones, label: 'Audio' },
+  { icon: Laptop, name: 'Gaming Laptops', count: '142 Products' },
+  { icon: Cpu, name: 'Gaming PC', count: '85 Builds' },
+  { icon: Monitor, name: 'Monitors', count: '110 Displays' },
+  { icon: Gamepad2, name: 'Gaming Gears', count: '320 Items' },
+  { icon: HardDrive, name: 'SSD Drives', count: '94 Drives' },
+  { icon: Database, name: 'External HDDs', count: '45 Drives' },
+  { icon: Network, name: 'Networking', count: '215 Devices' },
+  { icon: Headphones, name: 'Audio', count: '178 Headsets' },
 ];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
-};
 
 export default function CategoryGrid() {
   return (
-    <section>
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-black uppercase tracking-tight border-l-4 border-primary pl-4">Shop By Category</h2>
+    <section className="w-full">
+      <div className="mb-10 flex items-center justify-between">
+        <h2 className="text-3xl font-black uppercase tracking-tight text-white flex items-center gap-4">
+          <span className="w-2 h-8 bg-primary block" />
+          Shop By Category
+        </h2>
       </div>
       
-      <motion.div 
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4"
-      >
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {CATEGORIES.map((cat, i) => {
           const Icon = cat.icon;
           return (
             <motion.a
-              key={i}
-              variants={item}
               href="#"
-              className="group flex flex-col items-center justify-center gap-4 p-6 bg-card border border-border hover:border-secondary transition-all hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,221,0,0.15)] rounded-sm"
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: i * 0.05 }}
+              className="group relative flex flex-col items-start p-6 bg-[#111] border border-[#222] rounded-2xl overflow-hidden hover:border-primary hover:-translate-y-1 hover:shadow-[0_0_24px_rgba(177,22,22,0.3)] transition-all duration-300"
             >
-              <div className="text-primary group-hover:text-secondary transition-colors">
-                <Icon className="w-10 h-10" strokeWidth={1.5} />
+              {/* Diagonal stripe texture */}
+              <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.02)_25%,rgba(255,255,255,0.02)_50%,transparent_50%,transparent_75%,rgba(255,255,255,0.02)_75%,rgba(255,255,255,0.02)_100%)] bg-[length:6px_6px] pointer-events-none" />
+              
+              <div className="relative z-10 text-primary mb-6 group-hover:drop-shadow-[0_0_8px_rgba(177,22,22,0.8)] transition-all">
+                <Icon className="w-8 h-8" strokeWidth={2} />
               </div>
-              <span className="text-[13px] font-bold text-center group-hover:text-white transition-colors">{cat.label}</span>
+              
+              <h3 className="relative z-10 text-base font-bold text-white mb-1 uppercase tracking-wider">{cat.name}</h3>
+              <span className="relative z-10 text-xs font-semibold text-[#666]">{cat.count}</span>
             </motion.a>
           );
         })}
-      </motion.div>
+      </div>
     </section>
   );
 }
